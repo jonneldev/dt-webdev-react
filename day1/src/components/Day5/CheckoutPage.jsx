@@ -29,18 +29,33 @@ const initialProducts = [
 ];
 
 export default function CheckoutPage() {
-  const [products, setProducts] = useState(initialProducts);
+  // const [products, setProducts] = useState(initialProducts);
   const [promoCode, setPromoCode] = useState("");
+  const [productData, setProductData] = useState({})
 
   // TODO: Create a function that updates quantity of a specific product by its ID.
   // This should either increase or decrease the quantity (but never go below 0 or above 10).
+
+  // const handleQuantityUpdate = (productId, newQuantity) => {
+  //   setProducts((prevProducts) =>
+  //     prevProducts.map((product) =>
+  //       product.id === productId ? { ...product, quantity: newQuantity } : product
+  //     )
+  //   );
+  // };
+
   const handleQuantityUpdate = (productId, newQuantity) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === productId ? { ...product, quantity: newQuantity } : product
-      )
-    );
-  };
+    setProductData((prevData) => ({
+      ...prevData,
+      [productId] : {
+        ...prevData[productId],
+        quantity: newQuantity
+      }
+    }))
+  }
+
+  
+  
 
   
 
@@ -58,7 +73,8 @@ export default function CheckoutPage() {
 
       {/* List of product cards, pass handler to change quantities */}
       <ProductList
-        products={products}
+        products={initialProducts}
+        productData={productData}
         onQuantityChange={
           // TODO: Replace this stub with actual quantity change handler
           handleQuantityUpdate
