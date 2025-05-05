@@ -13,7 +13,8 @@ const StarRating = ({ rating, onRateChange }) => {
             cursor: "pointer",
             fontSize: "1.5rem",
             // TODO: change color either gray or gold
-            color: star <= rating ? "gold" : "gray",
+            color: star <= rating? "gold" : "gray"
+            
           }}
         >
           ★
@@ -83,13 +84,11 @@ const MovieReviews = () => {
       ...prevData,
       [movieId]: {
         ...prevData[movieId],
-        rating: newRating,
-      },
-    }));
-  };
+        rating: newRating
+      }
+    }))
+  }
 
-  
-  
   return (
     <MovieList 
       movies={initialMovies}
