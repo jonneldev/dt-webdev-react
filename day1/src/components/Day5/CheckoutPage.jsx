@@ -34,15 +34,13 @@ export default function CheckoutPage() {
 
   // TODO: Create a function that updates quantity of a specific product by its ID.
   // This should either increase or decrease the quantity (but never go below 0 or above 10).
-  const handleUpdateQuantity = (productId, newQuantity) => {
-    setProducts((prevData) => ({
-      ...prevData,
-      [productId]: {
-        ...prevData[productId],
-        quantity: newQuantity
-      }
-    }))
-  }
+  const handleQuantityUpdate = (productId, newQuantity) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId ? { ...product, quantity: newQuantity } : product
+      )
+    );
+  };
 
   
 
@@ -63,7 +61,7 @@ export default function CheckoutPage() {
         products={products}
         onQuantityChange={
           // TODO: Replace this stub with actual quantity change handler
-          handleUpdateQuantity
+          handleQuantityUpdate
         }
       />
       <PromoCode promoCode={promoCode} setPromoCode={setPromoCode} />
