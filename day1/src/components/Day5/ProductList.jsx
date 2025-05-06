@@ -11,7 +11,7 @@ export default function ProductList({ products, onQuantityChange, productData })
           product={product}
           onQuantityChange={onQuantityChange}
           productData={productData}
-          quantity={productData.quantity}
+          quantity={productData[product.id]?.quantity || 0}
         />
       ))}
     </div>

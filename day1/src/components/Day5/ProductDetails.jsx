@@ -5,10 +5,10 @@ export default function ProductDetails({ product }) {
   return (
     <div>
       {/* TODO display product name, description, and price */}
-      <h2>{}</h2>
+      <h2>{product.name}</h2>
       <p>{}</p>
       {/* TODO: Display the price with 2 decimal places only */}
-      <strong>Price: ${}</strong>
+      <strong>Price: ${product.price.toFixed(2)}</strong>
     </div>
   );
 }
