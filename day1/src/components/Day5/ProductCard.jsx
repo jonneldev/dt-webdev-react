@@ -3,7 +3,7 @@ import ProductDetails from "./ProductDetails";
 import QuantitySelector from "./QuantitySelector";
 
 // Shows product details and its quantity selector
-export default function ProductCard({ product, onQuantityChange, productData, quantity }) {
+export default function ProductCard({ product, onQuantityChange, quantity }) {
   
   return (
     <div
@@ -20,13 +20,13 @@ export default function ProductCard({ product, onQuantityChange, productData, qu
         quantity={quantity}
         onIncrease={() => {
           // TODO: Call onQuantityChange with product ID and "increase"
-          const newQuantity = Math.min(10, quantity + 1);
+          const newQuantity = quantity + 1;
           onQuantityChange(product.id, newQuantity)
           
         }}
         onDecrease={() => {
           // TODO: Call onQuantityChange with product ID and "decrease"
-          const newQuantity = Math.max(0, quantity - 1);
+          const newQuantity = quantity - 1;
           onQuantityChange(product.id, newQuantity)
         }}
       />

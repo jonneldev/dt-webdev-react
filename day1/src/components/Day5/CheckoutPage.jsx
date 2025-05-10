@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import ProductList from "./ProductList";
 import CheckoutButton from "./CheckoutButton";
 import PromoCode from "./PromoCode";
@@ -31,24 +31,37 @@ const initialProducts = [
 export default function CheckoutPage() {
   const [products, setProducts] = useState(initialProducts);
   const [promoCode, setPromoCode] = useState("");
-  const [productData, setProductData] = useState({})
-  const [totalAmount, setTotalAmount] = useState(0)
 
   // TODO: Create a function that updates quantity of a specific product by its ID.
-  // This should either increase or decrease the quantity (but never go below 0 or above 10)
+  //       This should either increase or decrease the quantity (but never go below 0 or above 10).
   const handleQuantityUpdate = (productId, newQuantity) => {
-    setProductData((prevData) => ({
-      ...prevData,
-      [productId] : {
-        ...prevData[productId],
-        quantity: newQuantity
-      }
-    }))
-  }
-  
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.id === productId
+          ? {
+              ...product,
+              quantity: Math.max(0, Math.min(10, newQuantity)),
+            }
+          : product
+      )
+    );
+  };
+
+  // TODO: Calculate total amount based on products with quantity > 0.
+  //       If promoCode is exactly 'MAYTHE4THBWU', apply a 50% discount.
+  const totalAmount = useMemo(() => {
+    const chosenProducts = products.filter((product) => product.quantity > 0);
+    const total = chosenProducts.reduce(
+      (sum, product) => sum + product.price * product.quantity,
+      0
+    );
+    return promoCode === "MAYTHE4THBWU" ? total * 0.5 : total;
+  }, [products, promoCode]);
+
 
   // TODO: Determine if the checkout button should be disabled.
   //       It should be disabled if all quantities are 0.
+  const isCheckoutDisabled = products.every((product) => product.quantity === 0);
 
   return (
     <div>
@@ -58,8 +71,7 @@ export default function CheckoutPage() {
 
       {/* List of product cards, pass handler to change quantities */}
       <ProductList
-        products={initialProducts}
-        productData={productData}
+        products={products}
         onQuantityChange={
           // TODO: Replace this stub with actual quantity change handler
           handleQuantityUpdate
@@ -79,7 +91,7 @@ export default function CheckoutPage() {
           <strong>Total: ${totalAmount.toFixed(2)}</strong>
         </div>
         {/* TODO: Replace false with logic to check if button should be disabled */}
-        <CheckoutButton disabled={false} />
+        <CheckoutButton disabled={isCheckoutDisabled} />
       </div>
     </div>
   );
