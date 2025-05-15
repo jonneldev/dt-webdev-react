@@ -8,6 +8,7 @@ import { BatchCounter } from './components/Day5/Day5';
 import MovieReviews from './components/Day5/MovieReviews';
 import CheckoutPage from './components/Day5/CheckoutPage';
 import UserForm from './components/Day6/Day6';
+import { CounterWithEffect } from './components/Day7/Day7';
 
 
 // import Part0, { Part2 } from './Activity1';
@@ -16,7 +17,10 @@ const UserInfoWithLoader = withLoader(UserInfo);
 function App() {
   return (
     <div className="App">
-      < UserForm />
+
+      < CounterWithEffect />
+
+      {/* < UserForm /> */}
 
       {/* < CheckoutPage /> */}
 
