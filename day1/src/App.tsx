@@ -9,6 +9,9 @@ import MovieReviews from './components/Day5/MovieReviews';
 import CheckoutPage from './components/Day5/CheckoutPage';
 import UserForm from './components/Day6/Day6';
 import { CounterWithEffect } from './components/Day7/Day7';
+import { MultiTab } from './components/Day8/MultiTab';
+import { OptimizationExample } from './components/Day9/OptimizationExample';
+
 
 
 // import Part0, { Part2 } from './Activity1';
@@ -18,7 +21,11 @@ function App() {
   return (
     <div className="App">
 
-      < CounterWithEffect />
+      <OptimizationExample />
+
+      {/* < MultiTab /> */}
+
+      {/* < CounterWithEffect /> */}
 
       {/* < UserForm /> */}
 
